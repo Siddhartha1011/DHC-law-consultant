@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 from app.config import Config
+from app.scraper.case_options import CaseOptions
 
 class DelhiHighCourtScraper:
     BASE_URL = Config.BASE_URL
@@ -17,6 +18,8 @@ class DelhiHighCourtScraper:
         self.logger = logging.getLogger(__name__)
 
         self.last_request_time=0
+
+        self.case_options=CaseOptions(driver)
 
     def respect_rate_limit(self):
         elapsed = time.time() - self.last_request_time
@@ -66,7 +69,10 @@ class DelhiHighCourtScraper:
                 f"Delhi High Court search form loaded - FAILED [within time limit]"
             )
 
-            return False    
+            return False
+
+    def get_case_types_and_years(self):
+        return self.case_options.get_case_types_and_years()    
         
     def get_current_url(self):
         return self.driver.current_url
