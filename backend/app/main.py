@@ -41,6 +41,22 @@ def main():
                 success
             )
 
+            case_types, years = scraper.get_case_types_and_years()
+
+            print("\n========================")
+            print("CASE TYPES")
+            print("========================")
+
+            for index, name in enumerate(case_types.values(), start=1):
+                print(f"{index}> {name}")
+
+            print("\n========================")
+            print("YEARS")
+            print("========================")
+
+            for year in years:
+                print(year)
+
         else:
 
             print("Failed to load search page.")
