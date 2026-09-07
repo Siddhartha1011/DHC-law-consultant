@@ -8,6 +8,7 @@ from selenium.common.exceptions import TimeoutException
 
 from app.config import Config
 from app.scraper.case_options import CaseOptions
+from app.scraper.captcha_find import CaptchaFinder
 
 class DelhiHighCourtScraper:
     BASE_URL = Config.BASE_URL
@@ -20,6 +21,8 @@ class DelhiHighCourtScraper:
         self.last_request_time=0
 
         self.case_options=CaseOptions(driver)
+
+        self.captcha_finder = CaptchaFinder(driver)
 
     def respect_rate_limit(self):
         elapsed = time.time() - self.last_request_time
@@ -72,7 +75,10 @@ class DelhiHighCourtScraper:
             return False
 
     def get_case_types_and_years(self):
-        return self.case_options.get_case_types_and_years()    
+        return self.case_options.get_case_types_and_years()  
+
+    def find_captcha_input(self):
+        return self.captcha_finder.find_captcha_input()  
         
     def get_current_url(self):
         return self.driver.current_url
