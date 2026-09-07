@@ -10,7 +10,7 @@ logging.basicConfig(
 
 def main():
     
-    browser = Browser(headless=False)
+    browser = Browser(headless=True)
     
     try:
 
@@ -56,6 +56,23 @@ def main():
 
             for year in years:
                 print(year)
+
+            captcha_input = scraper.find_captcha_input()
+
+            print("\n========================")
+            print("CAPTCHA")
+            print("========================")
+            
+            if captcha_input:
+                print(
+                    "CAPTCHA INPUT: FOUND"
+                )
+
+            else:
+
+                print(
+                    "CAPTCHA INPUT: NOT FOUND"
+                )
 
         else:
 
