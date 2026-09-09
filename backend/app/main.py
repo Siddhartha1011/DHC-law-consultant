@@ -74,6 +74,21 @@ def main():
                     "CAPTCHA INPUT: NOT FOUND"
                 )
 
+            captcha_text=scraper.find_captcha_text()
+
+            if captcha_text:
+
+                print(
+                    "CAPTCHA CODE:",
+                    captcha_text
+                )
+
+            else:
+
+                print(
+                    "CAPTCHA CODE NOT FOUND"
+                )
+
         else:
 
             print("Failed to load search page.")
